@@ -44,7 +44,11 @@ contract Epargne {
         payable(msg.sender).transfer(address(this).balance);
     }
 
-
+    function getBalance() public view returns(uint) {
+        return address(this).balance;
     }
+
+
+}
 
     
