@@ -2,6 +2,7 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 contract Epargne {
+
     address proprietaire;
     uint deadline;
     uint depotID;
@@ -13,6 +14,13 @@ contract Epargne {
 
     constructor(){
         proprietaire=msg.sender;
+    }
+
+    receive() external payable {
+        if(address(this).balance == 0) {
+            deadline = block.timestamp + 4 weeks;
+            emit argentDepose(block.timestamp, msg.value);
+        }
     }
 
     
