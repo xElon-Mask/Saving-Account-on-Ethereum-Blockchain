@@ -38,6 +38,12 @@ contract Epargne {
         emit argentDepose(block.timestamp, msg.value);
     }
 
+    function withdrawEth() public {
+        require(msg.sender == proprietaire, "Vous n'êtes pas le propriétaire de ce compte Epargne");
+        require(block.timestamp >= deadline, "Vous ne pouvez pas encore accéder à votre Epargne, la période de temps n'est pas totalement écoulée");
+        payable(msg.sender).transfer(address(this).balance);
+    }
+
 
     }
 
