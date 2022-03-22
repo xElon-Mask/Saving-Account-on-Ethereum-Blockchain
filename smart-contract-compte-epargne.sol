@@ -19,8 +19,12 @@ contract Epargne {
     receive() external payable {
         if(address(this).balance == 0) {
             deadline = block.timestamp + 4 weeks;
-            emit argentDepose(block.timestamp, msg.value);
+            emit lancementEpargne(deadline);
         }
+
+        depotID += 1;
+        depots[depotID] = msg.value;
+        emit argentDepose(block.timestamp, msg.value);
     }
 
     
